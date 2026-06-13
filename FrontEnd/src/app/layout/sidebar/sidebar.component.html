@@ -1,0 +1,18 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white h-100">
+  <a routerLink="/admin/dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-light text-decoration-none">
+    <i class="bi bi-shop fs-4 me-2"></i>
+    <span class="fs-5 fw-bold">Saldos Online</span>
+  </a>
+  <hr />
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item" *ngFor="let link of links">
+      <a [routerLink]="link.route" routerLinkActive="active" class="nav-link text-white">
+        <i class="bi {{ link.icon }} me-2"></i>{{ link.label }}
+      </a>
+    </li>
+  </ul>
+  <hr />
+  <button type="button" class="btn btn-outline-light btn-sm" (click)="logout()">
+    <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
+  </button>
+</div>

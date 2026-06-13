@@ -1,0 +1,26 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+<div class="container py-4" *ngIf="!loading">
+  <h1 class="h3 fw-bold mb-4">Contacto</h1>
+
+  <div class="row g-4">
+    <div class="col-12 col-md-6">
+      <ul class="list-group">
+        <li class="list-group-item" *ngIf="store?.address"><i class="bi bi-geo-alt me-2"></i>{{ store?.address }}</li>
+        <li class="list-group-item" *ngIf="store?.phone"><i class="bi bi-telephone me-2"></i>{{ store?.phone }}</li>
+        <li class="list-group-item" *ngIf="store?.email"><i class="bi bi-envelope me-2"></i>{{ store?.email }}</li>
+        <li class="list-group-item" *ngIf="store?.schedule"><i class="bi bi-clock me-2"></i>{{ store?.schedule }}</li>
+      </ul>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <h5 class="fw-bold mb-3">Síguenos</h5>
+      <div class="d-flex gap-3 fs-2">
+        <a *ngIf="store?.facebookUrl" [href]="store?.facebookUrl" target="_blank" class="link-dark"><i class="bi bi-facebook"></i></a>
+        <a *ngIf="store?.instagramUrl" [href]="store?.instagramUrl" target="_blank" class="link-dark"><i class="bi bi-instagram"></i></a>
+        <a *ngIf="store?.tiktokUrl" [href]="store?.tiktokUrl" target="_blank" class="link-dark"><i class="bi bi-tiktok"></i></a>
+        <a *ngIf="store?.whatsappUrl" [href]="store?.whatsappUrl" target="_blank" class="link-dark"><i class="bi bi-whatsapp"></i></a>
+      </div>
+    </div>
+  </div>
+</div>

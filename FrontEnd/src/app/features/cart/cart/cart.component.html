@@ -1,0 +1,62 @@
+<div class="container py-4">
+  <h1 class="h3 fw-bold mb-4">Carrito de compras</h1>
+
+  <ng-container *ngIf="(items$ | async) as items">
+    <div class="alert alert-info" *ngIf="items.length === 0">
+      Tu carrito está vacío. <a routerLink="/products" class="alert-link">Ver catálogo</a>.
+    </div>
+
+    <div class="table-responsive" *ngIf="items.length > 0">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+            <td class="d-flex align-items-center gap-2">
+              <img
+                [src]="item.product.imageUrl || 'https://placehold.co/60x60?text=Sin+imagen'"
+                [alt]="item.product.name"
+                width="48"
+                height="48"
+                class="rounded object-fit-cover"
+              />
+              <span>{{ item.product.name }}</span>
+            </td>
+            <td>{{ item.product.price | currencyMxn }}</td>
+            <td>
+              <div class="input-group input-group-sm" style="width: 120px">
+                <button class="btn btn-outline-secondary" type="button" (click)="decrease(item)">-</button>
+                <span class="form-control text-center">{{ item.quantity }}</span>
+                <button class="btn btn-outline-secondary" type="button" (click)="increase(item)">+</button>
+              </div>
+            </td>
+            <td>{{ item.product.price * item.quantity | currencyMxn }}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-danger" type="button" (click)="remove(item)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-4" *ngIf="items.length > 0">
+      <button class="btn btn-outline-secondary" type="button" (click)="clear()">Vaciar carrito</button>
+
+      <div class="text-end">
+        <p class="fs-4 fw-bold mb-2">Total: {{ getTotal() | currencyMxn }}</p>
+        <button class="btn btn-primary">
+          <i class="bi bi-whatsapp me-1"></i>Finalizar pedido
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</div>

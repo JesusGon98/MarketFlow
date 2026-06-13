@@ -1,0 +1,61 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h3 fw-bold mb-0">{{ isEditMode ? 'Editar banner' : 'Nuevo banner' }}</h1>
+  <button type="button" class="btn btn-outline-secondary" (click)="onCancel()">
+    <i class="bi bi-arrow-left me-1"></i>Volver
+  </button>
+</div>
+
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+<div class="alert alert-danger" *ngIf="error && !loading">
+  No se pudo conectar con el servidor. Verifica que la API esté disponible.
+</div>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!loading" class="card shadow-sm">
+  <div class="card-body">
+    <div class="row g-3">
+      <div class="col-12 col-md-8">
+        <label class="form-label">Título</label>
+        <input type="text" class="form-control" formControlName="title" />
+        <div class="invalid-feedback d-block" *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
+          El título es obligatorio (2-80 caracteres).
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <label class="form-label">Orden de visualización</label>
+        <input type="number" class="form-control" formControlName="displayOrder" min="0" step="1" />
+        <div class="invalid-feedback d-block" *ngIf="form.get('displayOrder')?.invalid && form.get('displayOrder')?.touched">
+          El orden debe ser mayor o igual a 0.
+        </div>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Imagen (URL)</label>
+        <input type="text" class="form-control" formControlName="imageUrl" />
+        <div class="invalid-feedback d-block" *ngIf="form.get('imageUrl')?.invalid && form.get('imageUrl')?.touched">
+          La imagen es obligatoria.
+        </div>
+      </div>
+
+      <div class="col-12" *ngIf="form.get('imageUrl')?.value">
+        <img [src]="form.get('imageUrl')?.value" alt="Vista previa" class="img-fluid rounded" style="max-height: 200px" />
+      </div>
+
+      <div class="col-12">
+        <div class="form-check form-switch">
+          <input type="checkbox" class="form-check-input" id="active" formControlName="active" />
+          <label class="form-check-label" for="active">Banner activo</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer d-flex justify-content-end gap-2">
+    <button type="button" class="btn btn-outline-secondary" (click)="onCancel()">Cancelar</button>
+    <button type="submit" class="btn btn-primary" [disabled]="saving">
+      <span class="spinner-border spinner-border-sm me-2" *ngIf="saving"></span>
+      {{ isEditMode ? 'Guardar cambios' : 'Crear banner' }}
+    </button>
+  </div>
+</form>

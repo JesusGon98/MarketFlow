@@ -1,0 +1,57 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+<div class="container py-4" *ngIf="!loading">
+  <div class="alert alert-danger" *ngIf="error || !product">
+    No se encontró el producto solicitado.
+    <a routerLink="/products" class="alert-link">Volver al catálogo</a>.
+  </div>
+
+  <div class="row g-4" *ngIf="product && !error">
+    <div class="col-12 col-md-6">
+      <img
+        [src]="product.imageUrl || 'https://placehold.co/600x450?text=Sin+imagen'"
+        [alt]="product.name"
+        class="img-fluid rounded shadow-sm w-100"
+      />
+    </div>
+
+    <div class="col-12 col-md-6">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
+          <li class="breadcrumb-item"><a routerLink="/products">Catálogo</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+        </ol>
+      </nav>
+
+      <h1 class="h3 fw-bold">{{ product.name }}</h1>
+      <p class="text-muted" *ngIf="product.category">{{ product.category.name }}</p>
+
+      <p class="fs-3 fw-bold text-primary">{{ product.price | currencyMxn }}</p>
+
+      <p>{{ product.description }}</p>
+
+      <p>
+        <span class="badge" [class.bg-success]="product.stock > 0" [class.bg-secondary]="product.stock === 0">
+          {{ product.stock > 0 ? product.stock + ' disponibles' : 'Agotado' }}
+        </span>
+      </p>
+
+      <div class="d-flex align-items-center gap-3 my-3" *ngIf="product.stock > 0">
+        <div class="input-group" style="width: 140px">
+          <button class="btn btn-outline-secondary" type="button" (click)="decreaseQuantity()">-</button>
+          <span class="form-control text-center">{{ quantity }}</span>
+          <button class="btn btn-outline-secondary" type="button" (click)="increaseQuantity()">+</button>
+        </div>
+
+        <button type="button" class="btn btn-primary" (click)="addToCart()">
+          <i class="bi bi-cart-plus me-1"></i>Agregar al carrito
+        </button>
+      </div>
+
+      <div class="alert alert-success mt-3" *ngIf="addedToCart">
+        Producto agregado al carrito. <a routerLink="/cart" class="alert-link">Ver carrito</a>.
+      </div>
+    </div>
+  </div>
+</div>

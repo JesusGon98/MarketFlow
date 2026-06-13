@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: saldos-online-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: saldos
+      POSTGRES_PASSWORD: saldos
+      POSTGRES_DB: saldos_online
+    ports:
+      - '5433:5432'
+    volumes:
+      - saldos-online-db-data:/var/lib/postgresql/data
+
+volumes:
+  saldos-online-db-data:

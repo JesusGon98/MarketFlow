@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm" [style.backgroundColor]="store?.primaryColor || '#212529'">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" routerLink="/">
+      <img *ngIf="store?.logoUrl" [src]="store?.logoUrl" [alt]="store?.name" height="32" class="rounded" />
+      <i *ngIf="!store?.logoUrl" class="bi bi-shop fs-4"></i>
+      <span class="fw-bold">{{ store?.name || 'Saldos Online' }}</span>
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar"
+      aria-expanded="false"
+      aria-label="Abrir menú"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <i class="bi bi-house-door me-1"></i>Inicio
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/products" routerLinkActive="active">
+            <i class="bi bi-grid me-1"></i>Catálogo
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/categories" routerLinkActive="active">
+            <i class="bi bi-tags me-1"></i>Categorías
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact" routerLinkActive="active">
+            <i class="bi bi-telephone me-1"></i>Contacto
+          </a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav align-items-lg-center gap-lg-2">
+        <li class="nav-item">
+          <a class="nav-link position-relative" routerLink="/cart" routerLinkActive="active">
+            <i class="bi bi-cart3 fs-5"></i>
+            <span
+              *ngIf="(cartItemsCount$ | async) as count"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            >
+              {{ count }}
+              <span class="visually-hidden">productos en el carrito</span>
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin">
+            <i class="bi bi-person-gear me-1"></i>Admin
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h3 fw-bold mb-0">{{ isEditMode ? 'Editar categoría' : 'Nueva categoría' }}</h1>
+  <button type="button" class="btn btn-outline-secondary" (click)="onCancel()">
+    <i class="bi bi-arrow-left me-1"></i>Volver
+  </button>
+</div>
+
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+<div class="alert alert-danger" *ngIf="error && !loading">
+  No se pudo conectar con el servidor. Verifica que la API esté disponible.
+</div>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!loading" class="card shadow-sm">
+  <div class="card-body">
+    <div class="row g-3">
+      <div class="col-12">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" formControlName="name" />
+        <div class="invalid-feedback d-block" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+          El nombre es obligatorio (2-80 caracteres).
+        </div>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Descripción</label>
+        <textarea class="form-control" rows="3" formControlName="description"></textarea>
+      </div>
+
+      <div class="col-12">
+        <div class="form-check form-switch">
+          <input type="checkbox" class="form-check-input" id="active" formControlName="active" />
+          <label class="form-check-label" for="active">Categoría activa</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer d-flex justify-content-end gap-2">
+    <button type="button" class="btn btn-outline-secondary" (click)="onCancel()">Cancelar</button>
+    <button type="submit" class="btn btn-primary" [disabled]="saving">
+      <span class="spinner-border spinner-border-sm me-2" *ngIf="saving"></span>
+      {{ isEditMode ? 'Guardar cambios' : 'Crear categoría' }}
+    </button>
+  </div>
+</form>

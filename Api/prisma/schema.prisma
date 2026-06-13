@@ -1,0 +1,110 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  admin
+  editor
+}
+
+model Store {
+  id            String   @id @default(cuid())
+  name          String
+  logoUrl       String?
+  phone         String?
+  email         String?
+  address       String?
+  schedule      String?
+  primaryColor  String?  @default("#0d6efd")
+  secondaryColor String? @default("#6c757d")
+  facebookUrl   String?
+  instagramUrl  String?
+  tiktokUrl     String?
+  whatsappUrl   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  categories Category[]
+  products   Product[]
+  banners    Banner[]
+  users      User[]
+
+  @@map("stores")
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  storeId     String
+  name        String
+  description String?
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  store    Store     @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  products Product[]
+
+  @@index([storeId])
+  @@map("categories")
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  storeId     String
+  categoryId  String
+  name        String
+  description String?
+  price       Decimal  @db.Decimal(10, 2)
+  stock       Int      @default(0)
+  imageUrl    String?
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  store    Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id])
+
+  @@index([storeId])
+  @@index([categoryId])
+  @@map("products")
+}
+
+model Banner {
+  id           String   @id @default(cuid())
+  storeId      String
+  title        String
+  imageUrl     String
+  displayOrder Int      @default(0)
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  store Store @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  @@index([storeId])
+  @@map("banners")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  storeId      String
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         UserRole @default(admin)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  store Store @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  @@index([storeId])
+  @@map("users")
+}
