@@ -6,35 +6,36 @@ const prisma = new PrismaClient();
 async function main(): Promise<void> {
   const storeId = process.env.DEFAULT_STORE_ID ?? '1';
 
+  const storeData = {
+    name: 'Marketflow',
+    logoUrl: 'https://placehold.co/200x80?text=Marketflow',
+    phone: '+52 55 1234 5678',
+    email: 'contacto@marketflow.com',
+    address: 'Av. Siempre Viva 123, CDMX',
+    schedule: 'Lun - Sáb: 9:00 - 19:00',
+    primaryColor: '#0d6efd',
+    secondaryColor: '#6c757d',
+    facebookUrl: 'https://facebook.com/marketflow',
+    instagramUrl: 'https://instagram.com/marketflow',
+    tiktokUrl: 'https://tiktok.com/@marketflow',
+    whatsappUrl: 'https://wa.me/525512345678',
+  };
+
   const store = await prisma.store.upsert({
     where: { id: storeId },
-    update: {},
-    create: {
-      id: storeId,
-      name: 'Saldos Online',
-      logoUrl: 'https://placehold.co/200x80?text=Saldos+Online',
-      phone: '+52 55 1234 5678',
-      email: 'contacto@saldosonline.com',
-      address: 'Av. Siempre Viva 123, CDMX',
-      schedule: 'Lun - Sáb: 9:00 - 19:00',
-      primaryColor: '#0d6efd',
-      secondaryColor: '#6c757d',
-      facebookUrl: 'https://facebook.com/saldosonline',
-      instagramUrl: 'https://instagram.com/saldosonline',
-      tiktokUrl: 'https://tiktok.com/@saldosonline',
-      whatsappUrl: 'https://wa.me/525512345678',
-    },
+    update: storeData,
+    create: { id: storeId, ...storeData },
   });
 
   const passwordHash = await bcrypt.hash('admin123', 10);
 
   await prisma.user.upsert({
-    where: { email: 'admin@saldosonline.com' },
+    where: { email: 'admin@marketflow.com' },
     update: {},
     create: {
       storeId: store.id,
       name: 'Administrador',
-      email: 'admin@saldosonline.com',
+      email: 'admin@marketflow.com',
       passwordHash,
       role: 'admin',
     },

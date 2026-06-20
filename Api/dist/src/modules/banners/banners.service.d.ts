@@ -5,7 +5,7 @@ import { UpdateBannerDto } from './dto/update-banner.dto';
 export declare class BannersService {
     private readonly prisma;
     constructor(prisma: PrismaService);
-    findAll(storeId?: string): Promise<Banner[]>;
+    findAll(): Promise<Banner[]>;
     findById(id: string): Promise<Banner>;
     create(dto: CreateBannerDto, storeId: string): Promise<Banner>;
     update(id: string, dto: UpdateBannerDto): Promise<Banner>;

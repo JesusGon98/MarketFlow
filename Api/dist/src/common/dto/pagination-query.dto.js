@@ -16,7 +16,6 @@ class PaginationQueryDto {
     page;
     limit;
     search;
-    storeId;
 }
 exports.PaginationQueryDto = PaginationQueryDto;
 __decorate([
@@ -38,9 +37,4 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], PaginationQueryDto.prototype, "search", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], PaginationQueryDto.prototype, "storeId", void 0);
 //# sourceMappingURL=pagination-query.dto.js.map

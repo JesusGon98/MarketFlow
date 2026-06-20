@@ -21,7 +21,6 @@ let CategoriesService = class CategoriesService {
         const page = params.page ?? 1;
         const limit = params.limit ?? 10;
         const where = {
-            ...(params.storeId ? { storeId: params.storeId } : {}),
             ...(params.search ? { name: { contains: params.search, mode: 'insensitive' } } : {}),
         };
         const [items, total] = await Promise.all([

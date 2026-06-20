@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row gy-4">
       <div class="col-12 col-md-4">
-        <h5 class="fw-bold mb-3">{{ store?.name || 'Saldos Online' }}</h5>
+        <h5 class="fw-bold mb-3">{{ store?.name || 'Marketflow' }}</h5>
         <p class="text-secondary mb-1" *ngIf="store?.address"><i class="bi bi-geo-alt me-2"></i>{{ store?.address }}</p>
         <p class="text-secondary mb-1" *ngIf="store?.phone"><i class="bi bi-telephone me-2"></i>{{ store?.phone }}</p>
         <p class="text-secondary mb-1" *ngIf="store?.email"><i class="bi bi-envelope me-2"></i>{{ store?.email }}</p>
@@ -42,7 +42,7 @@
     <hr class="border-secondary my-4" />
 
     <p class="text-center text-secondary mb-0 small">
-      &copy; {{ currentYear }} {{ store?.name || 'Saldos Online' }}. Todos los derechos reservados.
+      &copy; {{ currentYear }} {{ store?.name || 'Marketflow' }}. Todos los derechos reservados.
     </p>
   </div>
 </footer>

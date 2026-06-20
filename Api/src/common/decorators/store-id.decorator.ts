@@ -1,9 +1,5 @@
-import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { Request } from 'express';
+import { createParamDecorator } from '@nestjs/common';
 
-export const StoreId = createParamDecorator((_data: unknown, ctx: ExecutionContext): string => {
-  const request = ctx.switchToHttp().getRequest<Request>();
-  const storeId = request.query.storeId as string | undefined;
-
-  return storeId ?? process.env.DEFAULT_STORE_ID ?? '1';
+export const StoreId = createParamDecorator((): string => {
+  return process.env.DEFAULT_STORE_ID ?? '1';
 });

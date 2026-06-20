@@ -5,7 +5,7 @@ import { UpdateBannerDto } from './dto/update-banner.dto';
 export declare class BannersController {
     private readonly bannersService;
     constructor(bannersService: BannersService);
-    findAll(storeId?: string): Promise<Banner[]>;
+    findAll(): Promise<Banner[]>;
     findOne(id: string): Promise<Banner>;
     create(dto: CreateBannerDto, storeId: string): Promise<Banner>;
     update(id: string, dto: UpdateBannerDto): Promise<Banner>;

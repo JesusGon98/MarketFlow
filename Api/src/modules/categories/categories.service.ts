@@ -6,7 +6,6 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
 export interface FindAllCategoriesParams {
-  storeId?: string;
   page?: number;
   limit?: number;
   search?: string;
@@ -21,7 +20,6 @@ export class CategoriesService {
     const limit = params.limit ?? 10;
 
     const where = {
-      ...(params.storeId ? { storeId: params.storeId } : {}),
       ...(params.search ? { name: { contains: params.search, mode: 'insensitive' as const } } : {}),
     };
 

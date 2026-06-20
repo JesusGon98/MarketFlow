@@ -24,8 +24,8 @@ let BannersController = class BannersController {
     constructor(bannersService) {
         this.bannersService = bannersService;
     }
-    findAll(storeId) {
-        return this.bannersService.findAll(storeId);
+    findAll() {
+        return this.bannersService.findAll();
     }
     findOne(id) {
         return this.bannersService.findById(id);
@@ -44,9 +44,8 @@ let BannersController = class BannersController {
 exports.BannersController = BannersController;
 __decorate([
     (0, common_1.Get)(),
-    __param(0, (0, common_1.Query)('storeId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], BannersController.prototype, "findAll", null);
 __decorate([

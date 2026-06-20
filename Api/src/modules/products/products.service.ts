@@ -20,7 +20,6 @@ export class ProductsService {
     const limit = params.limit ?? 10;
 
     const where = {
-      ...(params.storeId ? { storeId: params.storeId } : {}),
       ...(params.categoryId ? { categoryId: params.categoryId } : {}),
       ...(params.search ? { name: { contains: params.search, mode: 'insensitive' as const } } : {}),
     };

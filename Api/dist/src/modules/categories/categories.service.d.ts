@@ -4,7 +4,6 @@ import { PrismaService } from '../../prisma/prisma.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 export interface FindAllCategoriesParams {
-    storeId?: string;
     page?: number;
     limit?: number;
     search?: string;

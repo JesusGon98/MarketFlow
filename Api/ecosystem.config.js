@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'marketflow-api',
-      script: 'dist/main.js',
+      script: 'dist/src/main.js',
       cwd: __dirname,
       instances: 1,
       autorestart: true,

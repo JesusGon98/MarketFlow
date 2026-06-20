@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { Banner } from '@prisma/client';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { StoreId } from '../../common/decorators/store-id.decorator';
@@ -11,8 +11,8 @@ export class BannersController {
   constructor(private readonly bannersService: BannersService) {}
 
   @Get()
-  public findAll(@Query('storeId') storeId?: string): Promise<Banner[]> {
-    return this.bannersService.findAll(storeId);
+  public findAll(): Promise<Banner[]> {
+    return this.bannersService.findAll();
   }
 
   @Get(':id')

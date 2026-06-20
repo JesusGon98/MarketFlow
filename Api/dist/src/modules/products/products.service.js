@@ -22,7 +22,6 @@ let ProductsService = class ProductsService {
         const page = params.page ?? 1;
         const limit = params.limit ?? 10;
         const where = {
-            ...(params.storeId ? { storeId: params.storeId } : {}),
             ...(params.categoryId ? { categoryId: params.categoryId } : {}),
             ...(params.search ? { name: { contains: params.search, mode: 'insensitive' } } : {}),
         };

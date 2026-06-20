@@ -17,9 +17,8 @@ let BannersService = class BannersService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    findAll(storeId) {
+    findAll() {
         return this.prisma.banner.findMany({
-            where: storeId ? { storeId } : undefined,
             orderBy: { displayOrder: 'asc' },
         });
     }

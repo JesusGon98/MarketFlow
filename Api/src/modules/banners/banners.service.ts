@@ -8,9 +8,8 @@ import { UpdateBannerDto } from './dto/update-banner.dto';
 export class BannersService {
   constructor(private readonly prisma: PrismaService) {}
 
-  public findAll(storeId?: string): Promise<Banner[]> {
+  public findAll(): Promise<Banner[]> {
     return this.prisma.banner.findMany({
-      where: storeId ? { storeId } : undefined,
       orderBy: { displayOrder: 'asc' },
     });
   }

@@ -5,7 +5,6 @@ import { BrowserModule, provideClientHydration, withEventReplay, withHttpTransfe
 import { AppRoutingModule } from './app-routing.module';
 import { App } from './app.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
-import { StoreInterceptor } from './core/interceptors/store.interceptor';
 import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
@@ -21,7 +20,6 @@ import { LayoutModule } from './layout/layout.module';
     provideBrowserGlobalErrorListeners(),
     provideClientHydration(withEventReplay(), withHttpTransferCacheOptions({ filter: () => false })),
     provideHttpClient(withInterceptorsFromDi()),
-    { provide: HTTP_INTERCEPTORS, useClass: StoreInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [App]
