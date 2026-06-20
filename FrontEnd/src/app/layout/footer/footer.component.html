@@ -1,31 +1,31 @@
-<footer class="footer-modern text-light pt-5 pb-3">
+<footer class="footer-modern text-light pt-3 pb-2">
   <div class="container">
-    <div class="row gy-4">
+    <div class="row gy-3">
       <div class="col-12 col-md-4">
-        <h5 class="fw-bold mb-3 d-flex align-items-center gap-2">
-          <img src="/MarketFlow.png" alt="Marketflow" height="28" class="rounded" />
+        <h5 class="fw-bold mb-2 d-flex align-items-center gap-2">
+          <img src="/MarketFlow.png" alt="Marketflow" height="22" class="rounded" />
           {{ store?.name || 'Marketflow' }}
         </h5>
-        <p class="text-secondary mb-1" *ngIf="store?.address"><i class="bi bi-geo-alt me-2"></i>{{ store?.address }}</p>
-        <p class="text-secondary mb-1" *ngIf="store?.phone"><i class="bi bi-telephone me-2"></i>{{ store?.phone }}</p>
-        <p class="text-secondary mb-1" *ngIf="store?.email"><i class="bi bi-envelope me-2"></i>{{ store?.email }}</p>
-        <p class="text-secondary mb-0" *ngIf="store?.schedule"><i class="bi bi-clock me-2"></i>{{ store?.schedule }}</p>
+        <p class="text-secondary mb-1 small" *ngIf="store?.address"><i class="bi bi-geo-alt me-2"></i>{{ store?.address }}</p>
+        <p class="text-secondary mb-1 small" *ngIf="store?.phone"><i class="bi bi-telephone me-2"></i>{{ store?.phone }}</p>
+        <p class="text-secondary mb-1 small" *ngIf="store?.email"><i class="bi bi-envelope me-2"></i>{{ store?.email }}</p>
+        <p class="text-secondary mb-0 small" *ngIf="store?.schedule"><i class="bi bi-clock me-2"></i>{{ store?.schedule }}</p>
       </div>
 
       <div class="col-12 col-md-4">
-        <h5 class="fw-bold mb-3">Enlaces</h5>
-        <ul class="list-unstyled footer-links">
-          <li class="mb-2"><a routerLink="/">Inicio</a></li>
-          <li class="mb-2"><a routerLink="/products">Catálogo</a></li>
-          <li class="mb-2"><a routerLink="/categories">Categorías</a></li>
-          <li class="mb-2"><a routerLink="/cart">Carrito</a></li>
-          <li class="mb-2"><a routerLink="/contact">Contacto</a></li>
+        <h5 class="fw-bold mb-2">Enlaces</h5>
+        <ul class="list-unstyled footer-links small">
+          <li class="mb-1"><a routerLink="/">Inicio</a></li>
+          <li class="mb-1"><a routerLink="/products">Catálogo</a></li>
+          <li class="mb-1"><a routerLink="/categories">Categorías</a></li>
+          <li class="mb-1"><a routerLink="/cart">Carrito</a></li>
+          <li class="mb-1"><a routerLink="/contact">Contacto</a></li>
         </ul>
       </div>
 
       <div class="col-12 col-md-4">
-        <h5 class="fw-bold mb-3">Síguenos</h5>
-        <div class="d-flex gap-3 fs-5">
+        <h5 class="fw-bold mb-2">Síguenos</h5>
+        <div class="d-flex gap-2 fs-6">
           <a *ngIf="store?.facebookUrl" [href]="store?.facebookUrl" target="_blank" class="footer-social" aria-label="Facebook">
             <i class="bi bi-facebook"></i>
           </a>
@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <hr class="border-secondary opacity-25 my-4" />
+    <hr class="border-secondary opacity-25 my-2" />
 
     <p class="text-center text-secondary mb-0 small">
       &copy; {{ currentYear }} {{ store?.name || 'Marketflow' }}. Todos los derechos reservados.

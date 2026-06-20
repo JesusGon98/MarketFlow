@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Store } from '../../core/models/store.model';
 import { StoreService } from '../../core/services/store.service';
 
@@ -12,12 +12,21 @@ export class FooterComponent implements OnInit {
   public store?: Store;
   public currentYear = new Date().getFullYear();
 
-  constructor(private readonly storeService: StoreService) {}
+  constructor(
+    private readonly storeService: StoreService,
+    private readonly cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
     this.storeService.getCurrentStore().subscribe({
-      next: (response) => (this.store = response.data),
-      error: () => (this.store = undefined),
+      next: (response) => {
+        this.store = response.data;
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.store = undefined;
+        this.cdr.detectChanges();
+      },
     });
   }
 }
