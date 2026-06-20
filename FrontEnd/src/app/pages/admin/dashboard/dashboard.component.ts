@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { Product } from '../../../core/models/product.model';
 import { CategoryService } from '../../../core/services/category.service';
@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private readonly productService: ProductService,
     private readonly categoryService: CategoryService,
+    private readonly cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -36,10 +37,12 @@ export class DashboardComponent implements OnInit {
           .sort((a, b) => new Date(b.createdAt ?? 0).getTime() - new Date(a.createdAt ?? 0).getTime())
           .slice(0, 5);
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.loading = false;
         this.error = true;
+        this.cdr.detectChanges();
       },
     });
   }

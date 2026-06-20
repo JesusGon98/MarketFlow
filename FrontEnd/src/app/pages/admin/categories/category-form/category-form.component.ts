@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../../../core/services/category.service';
@@ -22,6 +22,7 @@ export class AdminCategoryFormComponent implements OnInit {
     private readonly categoryService: CategoryService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
+    private readonly cdr: ChangeDetectorRef,
   ) {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(80)]],
@@ -42,10 +43,12 @@ export class AdminCategoryFormComponent implements OnInit {
         next: (response) => {
           this.form.patchValue(response.data);
           this.loading = false;
+          this.cdr.detectChanges();
         },
         error: () => {
           this.loading = false;
           this.error = true;
+          this.cdr.detectChanges();
         },
       });
     }
@@ -69,6 +72,7 @@ export class AdminCategoryFormComponent implements OnInit {
       error: () => {
         this.saving = false;
         this.error = true;
+        this.cdr.detectChanges();
       },
     });
   }

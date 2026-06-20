@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Banner } from '../../../../core/models/banner.model';
 import { BannerService } from '../../../../core/services/banner.service';
 
@@ -14,7 +14,10 @@ export class AdminBannerListComponent implements OnInit {
   public error = false;
   public bannerToDelete?: Banner;
 
-  constructor(private readonly bannerService: BannerService) {}
+  constructor(
+    private readonly bannerService: BannerService,
+    private readonly cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
     this.loadBanners();
@@ -39,6 +42,7 @@ export class AdminBannerListComponent implements OnInit {
       error: () => {
         this.bannerToDelete = undefined;
         this.error = true;
+        this.cdr.detectChanges();
       },
     });
   }
@@ -50,10 +54,12 @@ export class AdminBannerListComponent implements OnInit {
       next: (response) => {
         this.banners = response.data.sort((a, b) => a.displayOrder - b.displayOrder);
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.loading = false;
         this.error = true;
+        this.cdr.detectChanges();
       },
     });
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { Banner } from '../../core/models/banner.model';
 import { Category } from '../../core/models/category.model';
@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
     private readonly categoryService: CategoryService,
     private readonly productService: ProductService,
     private readonly cartService: CartService,
+    private readonly cdr: ChangeDetectorRef,
   ) {}
 
   public get hasContent(): boolean {
@@ -49,10 +50,12 @@ export class HomeComponent implements OnInit {
         this.featuredCategories = categories.data.items;
         this.featuredProducts = products.data.items;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.loading = false;
         this.error = true;
+        this.cdr.detectChanges();
       },
     });
   }

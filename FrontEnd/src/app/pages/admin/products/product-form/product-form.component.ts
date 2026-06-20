@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../../../../core/models/category.model';
@@ -26,6 +26,7 @@ export class AdminProductFormComponent implements OnInit {
     private readonly categoryService: CategoryService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
+    private readonly cdr: ChangeDetectorRef,
   ) {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
@@ -40,8 +41,14 @@ export class AdminProductFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoryService.getAll({ limit: 100 }).subscribe({
-      next: (response) => (this.categories = response.data.items),
-      error: () => (this.error = true),
+      next: (response) => {
+        this.categories = response.data.items;
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.error = true;
+        this.cdr.detectChanges();
+      },
     });
 
     const id = this.route.snapshot.paramMap.get('id');
@@ -55,10 +62,12 @@ export class AdminProductFormComponent implements OnInit {
         next: (response) => {
           this.form.patchValue(response.data);
           this.loading = false;
+          this.cdr.detectChanges();
         },
         error: () => {
           this.loading = false;
           this.error = true;
+          this.cdr.detectChanges();
         },
       });
     }
@@ -82,6 +91,7 @@ export class AdminProductFormComponent implements OnInit {
       error: () => {
         this.saving = false;
         this.error = true;
+        this.cdr.detectChanges();
       },
     });
   }

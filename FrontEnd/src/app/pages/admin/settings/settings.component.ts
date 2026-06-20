@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Store } from '../../../core/models/store.model';
 import { StoreService } from '../../../core/services/store.service';
 
@@ -20,7 +20,10 @@ export class SettingsComponent implements OnInit {
   public social = { facebookUrl: '', instagramUrl: '', tiktokUrl: '', whatsappUrl: '' };
   public socialEnabled = { facebook: false, instagram: false, tiktok: false, whatsapp: false };
 
-  constructor(private readonly storeService: StoreService) {}
+  constructor(
+    private readonly storeService: StoreService,
+    private readonly cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
     this.storeService.getCurrentStore().subscribe({
@@ -49,10 +52,12 @@ export class SettingsComponent implements OnInit {
           whatsapp: !!this.store.whatsappUrl,
         };
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.loading = false;
         this.error = true;
+        this.cdr.detectChanges();
       },
     });
   }
@@ -92,10 +97,12 @@ export class SettingsComponent implements OnInit {
         this.store = response.data;
         this.saving = false;
         this.saved = true;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.saving = false;
         this.error = true;
+        this.cdr.detectChanges();
       },
     });
   }

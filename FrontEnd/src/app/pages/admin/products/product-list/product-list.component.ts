@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Product } from '../../../../core/models/product.model';
 import { ProductService } from '../../../../core/services/product.service';
 
@@ -14,7 +14,10 @@ export class AdminProductListComponent implements OnInit {
   public error = false;
   public productToDelete?: Product;
 
-  constructor(private readonly productService: ProductService) {}
+  constructor(
+    private readonly productService: ProductService,
+    private readonly cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
     this.loadProducts();
@@ -39,6 +42,7 @@ export class AdminProductListComponent implements OnInit {
       error: () => {
         this.productToDelete = undefined;
         this.error = true;
+        this.cdr.detectChanges();
       },
     });
   }
@@ -50,10 +54,12 @@ export class AdminProductListComponent implements OnInit {
       next: (response) => {
         this.products = response.data.items;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.loading = false;
         this.error = true;
+        this.cdr.detectChanges();
       },
     });
   }

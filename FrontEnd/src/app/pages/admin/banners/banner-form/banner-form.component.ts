@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BannerService } from '../../../../core/services/banner.service';
@@ -22,6 +22,7 @@ export class AdminBannerFormComponent implements OnInit {
     private readonly bannerService: BannerService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
+    private readonly cdr: ChangeDetectorRef,
   ) {
     this.form = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(80)]],
@@ -43,10 +44,12 @@ export class AdminBannerFormComponent implements OnInit {
         next: (response) => {
           this.form.patchValue(response.data);
           this.loading = false;
+          this.cdr.detectChanges();
         },
         error: () => {
           this.loading = false;
           this.error = true;
+          this.cdr.detectChanges();
         },
       });
     }
@@ -70,6 +73,7 @@ export class AdminBannerFormComponent implements OnInit {
       error: () => {
         this.saving = false;
         this.error = true;
+        this.cdr.detectChanges();
       },
     });
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../../core/models/product.model';
 import { CartService } from '../../../core/services/cart.service';
@@ -21,6 +21,7 @@ export class ProductDetailComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly productService: ProductService,
     private readonly cartService: CartService,
+    private readonly cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -36,10 +37,12 @@ export class ProductDetailComponent implements OnInit {
       next: (response) => {
         this.product = response.data;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.loading = false;
         this.error = true;
+        this.cdr.detectChanges();
       },
     });
   }

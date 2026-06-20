@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Category } from '../../../../core/models/category.model';
 import { CategoryService } from '../../../../core/services/category.service';
 
@@ -14,7 +14,10 @@ export class AdminCategoryListComponent implements OnInit {
   public error = false;
   public categoryToDelete?: Category;
 
-  constructor(private readonly categoryService: CategoryService) {}
+  constructor(
+    private readonly categoryService: CategoryService,
+    private readonly cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
     this.loadCategories();
@@ -39,6 +42,7 @@ export class AdminCategoryListComponent implements OnInit {
       error: () => {
         this.categoryToDelete = undefined;
         this.error = true;
+        this.cdr.detectChanges();
       },
     });
   }
@@ -50,10 +54,12 @@ export class AdminCategoryListComponent implements OnInit {
       next: (response) => {
         this.categories = response.data.items;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.loading = false;
         this.error = true;
+        this.cdr.detectChanges();
       },
     });
   }
