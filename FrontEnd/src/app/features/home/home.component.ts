@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
   public banners: Banner[] = [];
   public featuredCategories: Category[] = [];
   public featuredProducts: Product[] = [];
-  public loading = true;
   public error = false;
 
   constructor(
@@ -44,10 +43,8 @@ export class HomeComponent implements OnInit {
         this.banners = banners.data;
         this.featuredCategories = categories.data.items;
         this.featuredProducts = products.data.items;
-        this.loading = false;
       },
       error: () => {
-        this.loading = false;
         this.error = true;
       },
     });

@@ -8,7 +8,7 @@ async function main(): Promise<void> {
 
   const storeData = {
     name: 'Marketflow',
-    logoUrl: 'https://placehold.co/200x80?text=Marketflow',
+    logoUrl: '/MarketFlow.png',
     phone: '+52 55 1234 5678',
     email: 'contacto@marketflow.com',
     address: 'Av. Siempre Viva 123, CDMX',
