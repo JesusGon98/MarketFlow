@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, shareReplay } from 'rxjs';
+import { asapScheduler, Observable, observeOn, shareReplay } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ApiResponse } from '../../shared/interfaces/api-response.interface';
 import { Store } from '../models/store.model';
@@ -21,7 +21,7 @@ export class StoreService {
         .pipe(shareReplay(1));
     }
 
-    return this.currentStore$;
+    return this.currentStore$.pipe(observeOn(asapScheduler));
   }
 
   public update(storeId: string, store: Partial<Store>): Observable<ApiResponse<Store>> {
