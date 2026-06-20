@@ -31,7 +31,7 @@
             </td>
             <td>{{ item.product.price | currencyMxn }}</td>
             <td>
-              <div class="input-group input-group-sm" style="width: 120px">
+              <div class="input-group input-group-sm" style="max-width: 120px">
                 <button class="btn btn-outline-secondary" type="button" (click)="decrease(item)">-</button>
                 <span class="form-control text-center">{{ item.quantity }}</span>
                 <button class="btn btn-outline-secondary" type="button" (click)="increase(item)">+</button>

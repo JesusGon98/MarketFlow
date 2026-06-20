@@ -38,7 +38,7 @@
         <textarea class="form-control" rows="3" formControlName="description"></textarea>
       </div>
 
-      <div class="col-6 col-md-3">
+      <div class="col-12 col-md-3">
         <label class="form-label">Precio</label>
         <input type="number" class="form-control" formControlName="price" min="0" step="0.01" />
         <div class="invalid-feedback d-block" *ngIf="form.get('price')?.invalid && form.get('price')?.touched">
@@ -46,7 +46,7 @@
         </div>
       </div>
 
-      <div class="col-6 col-md-3">
+      <div class="col-12 col-md-3">
         <label class="form-label">Stock</label>
         <input type="number" class="form-control" formControlName="stock" min="0" step="1" />
         <div class="invalid-feedback d-block" *ngIf="form.get('stock')?.invalid && form.get('stock')?.touched">

@@ -37,8 +37,8 @@
         </span>
       </p>
 
-      <div class="d-flex align-items-center gap-3 my-3" *ngIf="product.stock > 0">
-        <div class="input-group" style="width: 140px">
+      <div class="d-flex flex-wrap align-items-center gap-3 my-3" *ngIf="product.stock > 0">
+        <div class="input-group" style="max-width: 140px">
           <button class="btn btn-outline-secondary" type="button" (click)="decreaseQuantity()">-</button>
           <span class="form-control text-center">{{ quantity }}</span>
           <button class="btn btn-outline-secondary" type="button" (click)="increaseQuantity()">+</button>
