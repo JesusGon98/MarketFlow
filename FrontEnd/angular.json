@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "PrimerProyectoAngular": {
+    "marketflow": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -67,13 +67,8 @@
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
             "security": {
               "allowedHosts": []
-            },
-            "ssr": {
-              "entry": "src/server.ts"
             }
           },
           "configurations": {
@@ -110,10 +105,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "PrimerProyectoAngular:build:production"
+              "buildTarget": "marketflow:build:production"
             },
             "development": {
-              "buildTarget": "PrimerProyectoAngular:build:development"
+              "buildTarget": "marketflow:build:development"
             }
           },
           "defaultConfiguration": "development"
