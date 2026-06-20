@@ -8,6 +8,8 @@ import { BannerCarouselComponent } from './components/banner-carousel/banner-car
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { BadgeComponent } from './components/badge/badge.component';
+import { ImageModalComponent } from './components/image-modal/image-modal.component';
 import { CurrencyMxnPipe } from './pipes/currency-mxn.pipe';
 
 @NgModule({
@@ -18,6 +20,8 @@ import { CurrencyMxnPipe } from './pipes/currency-mxn.pipe';
     SearchBoxComponent,
     LoadingSpinnerComponent,
     ConfirmDialogComponent,
+    BadgeComponent,
+    ImageModalComponent,
     CurrencyMxnPipe,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
@@ -32,6 +36,8 @@ import { CurrencyMxnPipe } from './pipes/currency-mxn.pipe';
     SearchBoxComponent,
     LoadingSpinnerComponent,
     ConfirmDialogComponent,
+    BadgeComponent,
+    ImageModalComponent,
     CurrencyMxnPipe,
   ],
 })

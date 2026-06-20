@@ -2,11 +2,12 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": "dfb2f975-1879-4970-be00-6ab0b6db1ad7"
   },
   "newProjectRoot": "projects",
   "projects": {
-    "saldos-online-frontend": {
+    "PrimerProyectoAngular": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -109,10 +110,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "saldos-online-frontend:build:production"
+              "buildTarget": "PrimerProyectoAngular:build:production"
             },
             "development": {
-              "buildTarget": "saldos-online-frontend:build:development"
+              "buildTarget": "PrimerProyectoAngular:build:development"
             }
           },
           "defaultConfiguration": "development"

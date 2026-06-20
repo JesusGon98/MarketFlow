@@ -3,7 +3,7 @@
     <a class="navbar-brand d-flex align-items-center gap-2" routerLink="/">
       <img *ngIf="store?.logoUrl" [src]="store?.logoUrl" [alt]="store?.name" height="32" class="rounded" />
       <i *ngIf="!store?.logoUrl" class="bi bi-shop fs-4"></i>
-      <span class="fw-bold">{{ store?.name || 'Marketflow' }}</span>
+      <span class="fw-bold">{{ store?.name || 'Mi Tienda' }}</span>
     </a>
 
     <button

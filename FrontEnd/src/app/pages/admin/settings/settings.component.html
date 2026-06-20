@@ -1,0 +1,109 @@
+<h1 class="h3 fw-bold mb-4">Configuración de la tienda</h1>
+
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+<div class="alert alert-danger" *ngIf="!loading && error">
+  No se pudo conectar con el servidor. Verifica que la API esté disponible.
+</div>
+
+<ng-container *ngIf="!loading">
+  <div class="alert alert-success" *ngIf="saved">Cambios guardados correctamente.</div>
+
+  <app-store-info-card
+    [storeName]="store.name"
+    [storeLogoUrl]="store.logoUrl || ''"
+    (saved)="onStoreInfoSaved($event)"
+  ></app-store-info-card>
+
+  <app-settings-section title="Contacto" icon="telephone" (saved)="onContactSaved()">
+    <div class="row g-3">
+      <div class="col-12 col-md-6">
+        <label class="form-label">Teléfono</label>
+        <input type="text" class="form-control" [(ngModel)]="contact.phone" />
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="form-label">Correo electrónico</label>
+        <input type="email" class="form-control" [(ngModel)]="contact.email" />
+      </div>
+      <div class="col-12">
+        <label class="form-label">Dirección</label>
+        <input type="text" class="form-control" [(ngModel)]="contact.address" />
+      </div>
+      <div class="col-12">
+        <label class="form-label">Horario de atención</label>
+        <input type="text" class="form-control" [(ngModel)]="contact.schedule" placeholder="Lun a Sáb, 9:00 - 19:00" />
+      </div>
+    </div>
+  </app-settings-section>
+
+  <app-settings-section title="Apariencia" icon="palette" (saved)="onAppearanceSaved()">
+    <div class="row g-3">
+      <div class="col-12 col-md-6">
+        <label class="form-label">Color primario</label>
+        <input type="color" class="form-control form-control-color" [(ngModel)]="appearance.primaryColor" />
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="form-label">Color secundario</label>
+        <input type="color" class="form-control form-control-color" [(ngModel)]="appearance.secondaryColor" />
+      </div>
+    </div>
+  </app-settings-section>
+
+  <app-settings-section title="Redes sociales" icon="share" (saved)="onSocialSaved()">
+    <app-toggle-option
+      label="Facebook"
+      description="Mostrar enlace de Facebook en la tienda"
+      [checked]="socialEnabled.facebook"
+      (checkedChange)="onSocialToggle('facebook', $event)"
+    ></app-toggle-option>
+    <input
+      type="text"
+      class="form-control mb-3"
+      *ngIf="socialEnabled.facebook"
+      [(ngModel)]="social.facebookUrl"
+      placeholder="https://facebook.com/..."
+    />
+
+    <app-toggle-option
+      label="Instagram"
+      description="Mostrar enlace de Instagram en la tienda"
+      [checked]="socialEnabled.instagram"
+      (checkedChange)="onSocialToggle('instagram', $event)"
+    ></app-toggle-option>
+    <input
+      type="text"
+      class="form-control mb-3"
+      *ngIf="socialEnabled.instagram"
+      [(ngModel)]="social.instagramUrl"
+      placeholder="https://instagram.com/..."
+    />
+
+    <app-toggle-option
+      label="TikTok"
+      description="Mostrar enlace de TikTok en la tienda"
+      [checked]="socialEnabled.tiktok"
+      (checkedChange)="onSocialToggle('tiktok', $event)"
+    ></app-toggle-option>
+    <input
+      type="text"
+      class="form-control mb-3"
+      *ngIf="socialEnabled.tiktok"
+      [(ngModel)]="social.tiktokUrl"
+      placeholder="https://tiktok.com/@..."
+    />
+
+    <app-toggle-option
+      label="WhatsApp"
+      description="Mostrar enlace de WhatsApp en la tienda"
+      [checked]="socialEnabled.whatsapp"
+      (checkedChange)="onSocialToggle('whatsapp', $event)"
+    ></app-toggle-option>
+    <input
+      type="text"
+      class="form-control"
+      *ngIf="socialEnabled.whatsapp"
+      [(ngModel)]="social.whatsappUrl"
+      placeholder="https://wa.me/..."
+    />
+  </app-settings-section>
+</ng-container>

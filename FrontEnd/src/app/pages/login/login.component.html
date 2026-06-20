@@ -1,0 +1,53 @@
+<div class="d-flex align-items-center justify-content-center bg-light" style="min-height: 100vh">
+  <div class="card shadow-sm" style="width: 100%; max-width: 400px">
+    <div class="card-body p-4">
+      <h1 class="h4 fw-bold text-center mb-4"><i class="bi bi-shop me-2"></i>Mi Tienda</h1>
+      <p class="text-center text-muted mb-4">Acceso al panel administrativo</p>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo electrónico</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            formControlName="email"
+            [class.is-invalid]="email?.invalid && email?.touched"
+          />
+          <div class="invalid-feedback" *ngIf="email?.errors?.['required'] && email?.touched">
+            El correo es obligatorio.
+          </div>
+          <div class="invalid-feedback" *ngIf="email?.errors?.['email'] && email?.touched">
+            Ingresa un correo válido.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            formControlName="password"
+            [class.is-invalid]="password?.invalid && password?.touched"
+          />
+          <div class="invalid-feedback" *ngIf="password?.errors?.['required'] && password?.touched">
+            La contraseña es obligatoria.
+          </div>
+          <div class="invalid-feedback" *ngIf="password?.errors?.['minlength'] && password?.touched">
+            La contraseña debe tener al menos 6 caracteres.
+          </div>
+        </div>
+
+        <div class="alert alert-danger" *ngIf="error">
+          Credenciales inválidas o no se pudo conectar con el servidor.
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100" [disabled]="submitting">
+          <span class="spinner-border spinner-border-sm me-2" *ngIf="submitting"></span>
+          Iniciar sesión
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

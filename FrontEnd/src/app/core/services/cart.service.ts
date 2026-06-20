@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { CartItem } from '../models/cart-item.model';
 import { Product } from '../models/product.model';
 
-const CART_STORAGE_KEY = 'saldos-online-cart';
+const CART_STORAGE_KEY = 'pp-cart';
 
 @Injectable({
   providedIn: 'root',

@@ -6,8 +6,8 @@ import { ApiResponse } from '../../shared/interfaces/api-response.interface';
 import { LoginRequest, LoginResponse } from '../models/auth.model';
 import { User } from '../models/user.model';
 
-const TOKEN_KEY = 'saldos-online-token';
-const USER_KEY = 'saldos-online-user';
+const TOKEN_KEY = 'pp-token';
+const USER_KEY = 'pp-user';
 
 @Injectable({
   providedIn: 'root',
